@@ -1,0 +1,190 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ================================
+   🎨 Rustic Theme Tokens
+================================= */
+:root {
+  --color-deep-green: #2f6f3b;
+  --color-warm-brown: #8b5e3c;
+  --color-cream: #f7f1e5;
+  --color-earth-yellow: #e9c46a;
+}
+
+/* ================================
+   🔤 Fonts & Base Layout
+================================= */
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  background-color: var(--color-cream);
+  background-image: url('/textures/paper-light.png');
+  background-repeat: repeat;
+  background-size: 600px auto; /* upscale for large screens */
+}
+
+/* Heading font pairing */
+h1, h2, h3, h4,
+.heading-font {
+  font-family: 'Merriweather', Georgia, 'Times New Roman', serif;
+}
+
+/* ================================
+   🌿 Textures & Backgrounds
+================================= */
+.bg-wood {
+  background-image: url('/textures/wood-plank.jpg');
+  background-size: 400px auto;
+}
+
+.bg-paper {
+  background-image: url('/textures/paper-light.png');
+  background-size: 300px auto;
+}
+
+/* ================================
+   🟤 Buttons
+================================= */
+.btn-brown {
+  @apply text-white rounded-lg font-medium shadow;
+  background: var(--color-warm-brown);
+}
+.btn-brown:hover { filter: brightness(0.95); }
+.btn-brown:active { transform: translateY(1px); }
+
+/* Ripple ink effect */
+.ripple {
+  position: relative;
+  overflow: hidden;
+}
+.ripple:after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, rgba(233,196,106,0.35) 10%, rgba(233,196,106,0) 60%);
+  transform: scale(0);
+  opacity: 0;
+  transition: transform 400ms ease, opacity 600ms ease;
+}
+.ripple:active:after {
+  transform: scale(3);
+  opacity: 1;
+}
+
+/* ================================
+   🪵 Wooden Sign Hover
+================================= */
+@keyframes wobble-swing {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(2deg); }
+  50% { transform: rotate(0deg); }
+  75% { transform: rotate(-2deg); }
+  100% { transform: rotate(0deg); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .sign-hover:hover { 
+    animation: wobble-swing 450ms ease-in-out; 
+    transform-origin: top center; 
+  }
+}
+
+/* ================================
+   📜 Parchment Cards
+================================= */
+.card-parchment {
+  background: var(--color-cream);
+  background-image: url('/textures/paper-light.png');
+  background-repeat: repeat;
+  border: 1px solid rgba(139, 94, 60, 0.25);
+  box-shadow: 0 8px 20px rgba(139, 94, 60, 0.18);
+}
+.card-parchment:hover { 
+  transform: translateY(-2px) rotate(-0.25deg); 
+  transition: transform 200ms ease; 
+}
+
+/* ================================
+   📜 Scroll Reveal Animation
+================================= */
+@keyframes unroll {
+  0% { transform: scaleY(0.85); opacity: 0; filter: blur(8px); }
+  60% { filter: blur(2px); }
+  100% { transform: scaleY(1); opacity: 1; filter: blur(0); }
+}
+.reveal-unroll { 
+  animation: unroll 600ms ease forwards; 
+  transform-origin: top; 
+}
+
+/* ================================
+   🕰️ Stamp Effect
+================================= */
+.stamp {
+  position: relative;
+  display: inline-block;
+  color: var(--color-deep-green);
+}
+.stamp:after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border: 3px dashed rgba(47,111,59,0.5);
+  transform: scale(0.9) rotate(-2deg);
+  opacity: 0;
+  transition: all 300ms ease;
+}
+.stamp.show:after { 
+  opacity: 1; 
+  transform: scale(1) rotate(-2deg); 
+}
+
+/* ================================
+   ⏳ Timeline Styles
+================================= */
+.timeline-scroll {
+  background-image: url('/textures/paper-light.png');
+  border-left: 6px dotted rgba(139, 94, 60, 0.6);
+  box-shadow: inset 0 0 20px rgba(139, 94, 60, 0.15);
+}
+.timeline-node { 
+  background: var(--color-earth-yellow); 
+  box-shadow: 0 2px 0 rgba(0,0,0,0.15); 
+}
+
+/* ================================
+   🚛 Truck Animation
+================================= */
+@keyframes move-truck { 
+  to { offset-distance: 100%; } 
+}
+.truck-path { 
+  offset-path: path("M0,0 C150,30 300,0 450,30 600,60 750,0 900,20"); 
+}
+.truck { 
+  offset-distance: 0%; 
+  animation: move-truck 5s linear infinite alternate; 
+}
+
+/* ================================
+   ✨ Glassmorphism
+================================= */
+.glass {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 1rem;
+}
+
+/* ================================
+   🎨 Utility Helpers
+================================= */
+.text-deep-green { color: var(--color-deep-green); }
+.bg-deep-green { background-color: var(--color-deep-green); }
+.bg-warm-brown { background-color: var(--color-warm-brown); }
+.bg-cream { background-color: var(--color-cream); }
+.text-earth-yellow { color: var(--color-earth-yellow); }
+.bg-earth-yellow { background-color: var(--color-earth-yellow); }
